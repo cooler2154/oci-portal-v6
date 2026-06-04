@@ -1,0 +1,45 @@
+<!-- templates/partials/modals.html -->
+
+<!-- Instance action confirm -->
+<div id="modal-inst" class="modal-backdrop" onclick="hideModal('modal-inst')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="modal-inst-title">Confirm action</h3>
+    <p id="modal-inst-body"></p>
+    <div class="modal-acts">
+      <button class="btn" onclick="hideModal('modal-inst')"><i class="ti ti-x"></i> Cancel</button>
+      <button id="modal-inst-confirm" class="btn btn-danger" onclick="execAction()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete user confirm -->
+<div id="modal-del-user" class="modal-backdrop" onclick="hideModal('modal-del-user')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3>Delete user</h3>
+    <p id="modal-del-body"></p>
+    <div class="modal-acts">
+      <button class="btn" onclick="hideModal('modal-del-user')"><i class="ti ti-x"></i> Cancel</button>
+      <button class="btn btn-danger" onclick="execDeleteUser()">
+        <i class="ti ti-trash"></i> Delete user
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Compartment scope picker -->
+<div id="modal-scope-picker" class="modal-backdrop" onclick="hideModal('modal-scope-picker')">
+  <div class="modal" style="width:500px;max-width:95vw" onclick="event.stopPropagation()">
+    <h3>Pick compartment scope</h3>
+    <p style="margin-bottom:12px;font-size:13px;color:var(--text-2)">
+      Select the compartments this user is allowed to access.
+      Load a region on the Instances tab first to populate this list.
+    </p>
+    <div id="scope-picker-body" style="max-height:320px;overflow-y:auto"></div>
+    <div class="modal-acts" style="margin-top:1rem">
+      <button class="btn" onclick="hideModal('modal-scope-picker')"><i class="ti ti-x"></i> Cancel</button>
+      <button class="btn btn-success" onclick="applyScopePicker()">
+        <i class="ti ti-check"></i> Apply selection
+      </button>
+    </div>
+  </div>
+</div>

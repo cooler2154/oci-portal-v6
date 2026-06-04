@@ -1,0 +1,51 @@
+20:00:39 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:03:03 INFO  [users       ] user=admin action=CREATE_USER resource=test-operator ip=127.0.0.1
+20:03:20 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+20:05:01 INFO  [instances   ] user=test-operator action=START resource=ndevrent01 region=ap-sydney-1 ip=127.0.0.1
+20:07:41 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:08:07 INFO  [instances   ] user=admin action=STOP resource=ndevrent01 region=ap-sydney-1 ip=127.0.0.1
+20:28:31 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:29:50 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:33:18 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:33:31 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:36:31 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+20:49:00 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+21:07:23 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+21:36:40 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+21:59:29 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+22:03:34 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+22:06:05 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+10:05:05 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+10:05:45 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+10:08:31 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+14:29:51 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+14:30:11 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+14:47:49 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+17:06:44 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+17:14:11 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+17:21:16 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+21:18:08 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+21:24:58 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+21:26:07 INFO  [instances   ] user=admin action=START resource=ndevrjas01 region=ap-sydney-1 ip=127.0.0.1
+21:32:59 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+21:40:12 INFO  [cache       ] user=admin action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+21:42:10 INFO  [instances   ] user=admin action=START resource=ndevrent01 region=ap-sydney-1 ip=127.0.0.1
+21:48:19 INFO  [cache       ] user=admin action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+21:56:10 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+22:08:46 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+22:09:07 INFO  [cache       ] user=admin action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+00:16:37 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+00:21:19 INFO  [cache       ] user=admin action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+00:22:00 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+00:22:35 INFO  [cache       ] user=test-operator action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+00:23:06 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+00:23:47 INFO  [instances   ] user=admin action=STOP resource=ndevrjas01 region=ap-sydney-1 ip=127.0.0.1
+00:23:53 INFO  [instances   ] user=admin action=STOP resource=ndevrent01 region=ap-sydney-1 ip=127.0.0.1
+00:24:58 INFO  [users       ] user=admin action=UPDATE_USER resource=test-operator ip=127.0.0.1
+00:25:19 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+10:05:34 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+10:08:16 INFO  [cache       ] user=admin action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+10:09:19 INFO  [auth        ] user=test-operator action=LOGIN ip=127.0.0.1
+10:09:54 INFO  [cache       ] user=test-operator action=CACHE_CLEAR_DV920 endpoints=2 ip=127.0.0.1
+10:10:05 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1
+14:23:39 INFO  [auth        ] user=admin action=LOGIN ip=127.0.0.1

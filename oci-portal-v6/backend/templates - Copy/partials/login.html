@@ -1,0 +1,29 @@
+<!-- templates/partials/login.html -->
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-hdr">
+      <i class="ti ti-server-2"></i>
+	  
+      <h1>NDEVR OCI Portal</h1>
+      <p>Sign in with your username and password.</p>
+    </div>
+
+    <form id="login-form">
+      <div class="fgrp" style="margin-bottom:1rem">
+        <label for="login-username">Username</label>
+        <input id="login-username" type="text" placeholder="admin" required autofocus autocomplete="username"/>
+      </div>
+      <div class="fgrp" style="margin-bottom:1.25rem">
+        <label for="login-pw">Password</label>
+        <input id="login-pw" type="password" placeholder="••••••••" required autocomplete="current-password"/>
+      </div>
+      <div id="login-err" class="login-err" style="display:none">
+        <i class="ti ti-alert-triangle"></i>
+        <span id="login-err-msg"></span>
+      </div>
+      <button id="login-btn" type="submit" class="login-btn">
+        <i class="ti ti-login"></i> Sign in
+      </button>
+    </form>
+  </div>
+</div>

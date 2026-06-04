@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NDEVR OCI Portal</title>
+
+  <!-- Tabler Icons CDN -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/tabler-icons.min.css" />
+
+  <!-- Portal stylesheet -->
+  <link rel="stylesheet" href="/static/css/portal.css" />
+</head>
+<body>
+
+<!-- ── Login page ──────────────────────────────────────────── -->
+<div id="login-page">
+  {% include "partials/login.html" %}
+</div>
+
+<!-- ── Portal (shown after login) ─────────────────────────── -->
+<div id="portal-page" style="display:none">
+  {% include "partials/topbar.html" %}
+
+  <div class="portal">
+    {% include "partials/tabbar.html" %}
+
+    <!-- Tab panels -->
+    <div id="panel-instances" class="panel active">
+      {% include "partials/tab_instances.html" %}
+    </div>
+
+    <div id="panel-users" class="panel">
+      {% include "partials/tab_users.html" %}
+    </div>
+
+    <div id="panel-audit" class="panel">
+      {% include "partials/tab_audit.html" %}
+    </div>
+
+    <div id="panel-debug" class="panel">
+      {% include "partials/tab_debug.html" %}
+    </div>
+  </div>
+
+  <!-- Modals -->
+  {% include "partials/modals.html" %}
+</div>
+
+<!-- Toast container -->
+<div id="toast-area"></div>
+
+<!-- Portal JS -->
+<script src="/static/js/portal.js"></script>
+
+<script>
+  // Wire up login form
+  document.getElementById('login-form').addEventListener('submit', doLogin);
+
+  // Check if already logged in (e.g. back-navigation)
+  // Nothing to do — token is in memory, page refresh requires re-login (by design)
+</script>
+</body>
+</html>

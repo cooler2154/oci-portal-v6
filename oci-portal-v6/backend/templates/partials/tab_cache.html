@@ -1,0 +1,80 @@
+<!-- templates/partials/tab_cache.html -->
+<div class="sec-hdr">
+  <div class="sec-ttl">JDE Clear Cache</div>
+  <button id="cache-config-btn" class="btn btn-primary" onclick="openCacheConfig()" style="display:none">
+    <i class="ti ti-settings"></i> Configuration
+  </button>
+</div>
+
+<!-- Cache Grid with responsive layout -->
+<div class="cache-grid">
+  
+  <!-- DV920 - Development Environment -->
+  <div class="cache-card">
+    <div class="cache-card-header">
+      <div class="cache-card-icon">DV920</div>
+      <div class="cache-card-title">Development</div>
+      <div class="cache-card-desc">Clear JDBJ & AIS caches</div>
+    </div>
+    
+    <button class="btn-cache" id="cache-btn-DV920" onclick="askClearCache('DV920')">
+      <i class="ti ti-trash"></i> Clear Cache
+    </button>
+    
+    <div class="cache-result" id="cache-result-DV920"></div>
+  </div>
+
+  <!-- PY920 - Pre-Production Environment -->
+  <div class="cache-card">
+    <div class="cache-card-header">
+      <div class="cache-card-icon" style="color:#f59e0b">PY920</div>
+      <div class="cache-card-title">Pre-Production</div>
+      <div class="cache-card-desc">Clear JDBJ & AIS caches</div>
+    </div>
+    
+    <button class="btn-cache" id="cache-btn-PY920" onclick="askClearCache('PY920')">
+      <i class="ti ti-trash"></i> Clear Cache
+    </button>
+    
+    <div class="cache-result" id="cache-result-PY920"></div>
+  </div>
+
+  <!-- DM920 - Demo Environment -->
+  <div class="cache-card">
+    <div class="cache-card-header">
+      <div class="cache-card-icon" style="color:#22c55e">DM920</div>
+      <div class="cache-card-title">Demo</div>
+      <div class="cache-card-desc">Clear JDBJ & AIS caches</div>
+    </div>
+    
+    <button class="btn-cache" id="cache-btn-DM920" onclick="askClearCache('DM920')">
+      <i class="ti ti-trash"></i> Clear Cache
+    </button>
+    
+    <div class="cache-result" id="cache-result-DM920"></div>
+  </div>
+
+</div>
+
+<!-- Information section -->
+<div style="background:var(--bg-secondary);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:16px">
+  <div style="font-size:13px;color:var(--text);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px">
+    <i class="ti ti-info-circle" style="color:var(--blue);font-size:18px"></i>
+    About Cache Clearing
+  </div>
+  <ul style="margin:0;padding-left:24px;font-size:12px;color:var(--text-3);line-height:1.6">
+    <li>Clears JDE JDBJ (database) caches across all configured instances</li>
+    <li>Also clears AIS (application integration services) data caches</li>
+    <li>Operation is non-disruptive to running JDE processes</li>
+    <li>Requires Operator or Admin role</li>
+    <li>All cache clearing operations are logged for audit compliance</li>
+  </ul>
+</div>
+
+<!-- Warning section -->
+<div style="font-size:12px;color:var(--text-3);padding:12px;background:var(--bg-secondary);border-radius:var(--radius-md);border-left:4px solid var(--amber);display:flex;gap:8px">
+  <i class="ti ti-alert-circle" style="color:var(--amber);font-size:18px;flex-shrink:0;margin-top:2px"></i>
+  <div>
+    <strong style="color:var(--text)">⚠️ Important:</strong> Clearing cache will temporarily affect all JDE instances in the selected environment. This operation clears both database caches and AIS data caches. Plan accordingly and notify users if needed.
+  </div>
+</div>

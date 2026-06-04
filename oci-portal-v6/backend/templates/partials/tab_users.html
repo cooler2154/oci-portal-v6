@@ -1,0 +1,155 @@
+<!-- templates/partials/tab_users.html -->
+<div class="sec-hdr">
+  <div class="sec-ttl">Users &amp; roles</div>
+  <button class="btn btn-primary" onclick="openAddUser()">
+    <i class="ti ti-user-plus"></i> Add new user
+  </button>
+</div>
+
+<!-- Add / Edit user form -->
+<div id="user-form" class="uform" style="display:none">
+  <div class="form-title" id="uform-title">Add new user</div>
+  <div class="fgrid">
+    <div class="fgrp">
+      <label>Full name <span style="color:var(--red)">*</span></label>
+      <input id="u-name" type="text" placeholder="e.g. Jane Smith" />
+    </div>
+    <div class="fgrp">
+      <label>Username <span style="color:var(--red)">*</span>
+        <small style="color:var(--text-3)">(login ID, no email format needed)</small>
+      </label>
+      <input id="u-username" type="text" placeholder="e.g. jsmith" autocomplete="off"/>
+    </div>
+    <div class="fgrp">
+      <label>Email <small style="color:var(--text-3)">(optional)</small></label>
+      <input id="u-email" type="email" placeholder="jane@myorg.com" />
+    </div>
+    <div id="pw-row" class="fgrp">
+      <label>Password <span style="color:var(--red)" id="pw-required">*</span>
+        <small style="color:var(--text-3)" id="pw-hint"></small>
+      </label>
+      <input id="u-password" type="password" placeholder="Min 8 characters" autocomplete="new-password"/>
+    </div>
+    <div class="fgrp">
+      <label>Role</label>
+      <select id="u-role" onchange="onRoleChange()">
+        <option value="admin">Admin — full access to everything</option>
+        <option value="operator" selected>Operator — controlled access (configurable)</option>
+        <option value="viewer">Viewer — read only, no actions</option>
+      </select>
+    </div>
+
+    <!-- Operator-only fields -->
+    <div class="fgrp" id="scope-row">
+      <label>Compartment scope
+        <small style="color:var(--text-3)">"all" or pick below</small>
+      </label>
+      <input id="u-scope" type="text" oninput="refreshScopeChips()"
+             placeholder='all  —or—  ocid1.compartment.oc1..xxx,ocid1.compartment.oc1..yyy'/>
+      <div style="margin-top:5px;display:flex;gap:6px;flex-wrap:wrap" id="scope-cmp-chips"></div>
+      <button type="button" class="btn" style="margin-top:6px;font-size:11px"
+              onclick="pickScopeFromCompartments()">
+        <i class="ti ti-list-check"></i> Pick from compartments
+      </button>
+    </div>
+
+    <div class="fgrp" id="actions-row">
+      <label>Allowed instance actions
+        <small style="color:var(--text-3)">unchecked = all actions allowed</small>
+      </label>
+      <div style="display:flex;gap:12px;margin-top:5px;flex-wrap:wrap">
+        <label class="chk-lbl"><input type="checkbox" id="act-start"  onchange="syncActionField()"> Start</label>
+        <label class="chk-lbl"><input type="checkbox" id="act-stop"   onchange="syncActionField()"> Stop</label>
+        <label class="chk-lbl"><input type="checkbox" id="act-reboot" onchange="syncActionField()"> Reboot</label>
+      </div>
+      <input id="u-allowed-actions" type="hidden" value=""/>
+    </div>
+  </div>
+
+  <!-- OCI Tag filters section -->
+  <div id="tag-filters-section" style="margin-top:14px;padding-top:14px;border-top:0.5px solid var(--border)">
+    <div style="font-size:13px;font-weight:500;margin-bottom:6px;display:flex;align-items:center;gap:8px">
+      <i class="ti ti-tag" style="font-size:15px;color:var(--blue)"></i>
+      OCI Tag access rules
+      <small style="color:var(--text-3);font-weight:400">
+        — user can only see &amp; act on instances matching ALL rules below
+      </small>
+    </div>
+    <div id="tag-filter-rows"></div>
+    <button type="button" class="btn btn-primary" style="font-size:12px;margin-top:8px"
+            onclick="addTagFilterRow()">
+      <i class="ti ti-plus"></i> Add tag rule
+    </button>
+    <div style="font-size:11px;color:var(--text-3);margin-top:6px">
+      <strong>Freeform tag:</strong> leave Namespace blank, set Key and Value.<br>
+      <strong>Defined tag:</strong> set Namespace (e.g. <code>Oracle-Tags</code>), Key, and Value.
+    </div>
+  </div>
+
+  <div class="ffoot" style="margin-top:14px">
+    <button class="btn" onclick="closeUserForm()"><i class="ti ti-x"></i> Cancel</button>
+    <button class="btn btn-success" onclick="saveUser()">
+      <i class="ti ti-device-floppy"></i> Save user
+    </button>
+  </div>
+</div>
+
+<!-- Users table -->
+<div class="tw">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:13%">Name</th>
+        <th style="width:11%">Username</th>
+        <th style="width:17%">Email</th>
+        <th style="width:10%">Role</th>
+        <th style="width:14%">Compartment scope</th>
+        <th style="width:10%">Allowed actions</th>
+        <th style="width:14%">Tag rules</th>
+        <th style="width:6%">Status</th>
+        <th style="width:5%">Manage</th>
+      </tr>
+    </thead>
+    <tbody id="user-tbody">
+      <tr><td colspan="9"><div class="empty"><i class="ti ti-loader"></i>Loading…</div></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Permissions reference -->
+<div style="font-size:13px;font-weight:500;margin:1.25rem 0 10px">Role permissions</div>
+<div class="perm-grid">
+  <div class="pcard">
+    <span class="r-admin"><i class="ti ti-crown" style="font-size:10px"></i>Admin</span>
+    <div class="pdesc">Full access. Manages users, all compartments, all regions.</div>
+    <ul class="plist">
+      <li class="y"><i class="ti ti-check"></i>All instances, all regions</li>
+      <li class="y"><i class="ti ti-check"></i>Start / Stop / Reboot</li>
+      <li class="y"><i class="ti ti-check"></i>All compartments</li>
+      <li class="y"><i class="ti ti-check"></i>Manage users &amp; tags</li>
+      <li class="y"><i class="ti ti-check"></i>Full audit + debug</li>
+    </ul>
+  </div>
+  <div class="pcard">
+    <span class="r-operator"><i class="ti ti-settings" style="font-size:10px"></i>Operator</span>
+    <div class="pdesc">Configurable: scope, actions, and OCI tag rules applied per user.</div>
+    <ul class="plist">
+      <li class="m"><i class="ti ti-minus"></i>Scoped compartments only</li>
+      <li class="m"><i class="ti ti-minus"></i>Permitted actions only</li>
+      <li class="m"><i class="ti ti-minus"></i>Tag-matched instances only</li>
+      <li class="n"><i class="ti ti-x"></i>Cannot manage users</li>
+      <li class="y"><i class="ti ti-check"></i>Own audit entries</li>
+    </ul>
+  </div>
+  <div class="pcard">
+    <span class="r-viewer"><i class="ti ti-eye" style="font-size:10px"></i>Viewer</span>
+    <div class="pdesc">Read-only. Sees scoped instances, no actions.</div>
+    <ul class="plist">
+      <li class="m"><i class="ti ti-minus"></i>Scoped compartments only</li>
+      <li class="n"><i class="ti ti-x"></i>No Start / Stop / Reboot</li>
+      <li class="m"><i class="ti ti-minus"></i>Tag-matched instances only</li>
+      <li class="n"><i class="ti ti-x"></i>Cannot manage users</li>
+      <li class="n"><i class="ti ti-x"></i>No audit access</li>
+    </ul>
+  </div>
+</div>

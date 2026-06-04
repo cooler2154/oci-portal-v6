@@ -1,0 +1,77 @@
+<!-- templates/partials/tab_instances.html -->
+
+<div class="filter-bar" style="grid-template-columns:1fr 1fr 1fr 1fr;margin-bottom:1rem">
+  <div class="fg">
+    <label>Region <span style="color:var(--red)">*</span></label>
+    <select id="region-select" onchange="onRegionChange()">
+      <option value="">— select region —</option>
+    </select>
+  </div>
+  <div class="fg">
+    <label>Compartment <span style="color:var(--red)">*</span></label>
+    <select id="cmp-select" onchange="loadInstances()" disabled>
+      <option value="">— select compartment —</option>
+    </select>
+  </div>
+  <div class="fg">
+    <label>Status</label>
+    <select id="status-filter" onchange="renderInstances()">
+      <option value="all">All statuses</option>
+      <option value="RUNNING">Running</option>
+      <option value="STOPPED">Stopped</option>
+    </select>
+  </div>
+  <div class="fg">
+    <label>Shape</label>
+    <select id="shape-filter" onchange="renderInstances()">
+      <option value="all">All shapes</option>
+      <option value="VM.Standard.E4.Flex">VM.Standard.E4.Flex</option>
+      <option value="VM.Standard.E3.Flex">VM.Standard.E3.Flex</option>
+      <option value="VM.Standard3.Flex">VM.Standard3.Flex</option>
+      <option value="VM.Standard.A1.Flex">VM.Standard.A1.Flex</option>
+      <option value="BM.Standard3.64">BM.Standard3.64</option>
+    </select>
+  </div>
+</div>
+
+<div class="search-row">
+  <div class="sw">
+    <i class="ti ti-search"></i>
+    <input id="inst-search" type="text" placeholder="Search by name, OCID or tag…" oninput="renderInstances()" />
+  </div>
+  <div id="tag-filter-chips" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"></div>
+</div>
+
+<!-- Stats row -->
+<div class="stats-row">
+  <div class="stat"><div class="stat-lbl">Shown</div><div class="stat-val" id="stat-shown">0</div></div>
+  <div class="stat"><div class="stat-lbl">Running</div><div class="stat-val g" id="stat-running">0</div></div>
+  <div class="stat"><div class="stat-lbl">Stopped</div><div class="stat-val r" id="stat-stopped">0</div></div>
+  <div class="stat"><div class="stat-lbl">In progress</div><div class="stat-val a" id="stat-progress">0</div></div>
+  <div class="stat"><div class="stat-lbl">Your tag rules</div><div class="stat-val" id="stat-tags" style="font-size:14px">—</div></div>
+</div>
+
+<div class="result-count" id="inst-count">Select a region, then a compartment to load instances.</div>
+
+<div class="tw">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:20%">Instance</th>
+        <th style="width:11%">Status</th>
+        <th style="width:16%">Shape</th>
+        <th style="width:11%">Region</th>
+        <th style="width:4%;text-align:center">CPU</th>
+        <th style="width:5%;text-align:center">RAM</th>
+        <th style="width:12%">OCI Tags</th>
+        <th style="width:21%">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="inst-tbody">
+      <tr><td colspan="8">
+        <div class="empty"><i class="ti ti-arrow-up"></i>
+          Select a region and compartment above to load instances.</div>
+      </td></tr>
+    </tbody>
+  </table>
+</div>

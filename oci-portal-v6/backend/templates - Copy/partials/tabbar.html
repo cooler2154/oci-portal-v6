@@ -1,0 +1,16 @@
+<!-- templates/partials/tabbar.html -->
+<div class="tab-bar">
+  <button id="tab-instances" class="tab-btn active" onclick="switchTab('instances')">
+    <i class="ti ti-server-2"></i> Instances
+  </button>
+  <button id="tab-users" class="tab-btn" onclick="switchTab('users')">
+    <i class="ti ti-users"></i> User management
+  </button>
+  <button id="tab-audit" class="tab-btn" onclick="switchTab('audit')">
+    <i class="ti ti-clipboard-list"></i> Audit log
+  </button>
+  <button id="tab-debug" class="tab-btn" onclick="switchTab('debug'); startLogAutoRefresh()">
+    <i class="ti ti-bug"></i> Debug
+    <span id="err-badge" class="err-badge" style="display:none">0</span>
+  </button>
+</div>

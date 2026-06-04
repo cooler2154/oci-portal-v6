@@ -1,0 +1,40 @@
+<!-- templates/partials/tab_debug.html -->
+<div class="sec-hdr">
+  <div class="sec-ttl">Debug console</div>
+  <button class="btn btn-primary" onclick="loadLogs()">
+    <i class="ti ti-refresh"></i> Refresh
+  </button>
+</div>
+
+<!-- Filters -->
+<div class="dbtb">
+  <select id="dl-level" onchange="loadLogs()">
+    <option value="">All levels</option>
+    <option value="DEBUG">DEBUG</option>
+    <option value="INFO">INFO</option>
+    <option value="WARN">WARN</option>
+    <option value="ERROR">ERROR</option>
+  </select>
+  <select id="dl-module" onchange="loadLogs()">
+    <option value="">All modules</option>
+    <option value="auth">auth</option>
+    <option value="oci">oci</option>
+    <option value="api">api</option>
+    <option value="audit">audit</option>
+    <option value="main">main</option>
+  </select>
+  <div class="sw" style="flex:1;max-width:240px">
+    <i class="ti ti-search"></i>
+    <input id="dl-q" type="text" placeholder="Filter logs…" oninput="loadLogs()" />
+  </div>
+</div>
+
+<!-- Log console -->
+<div class="logcon" id="log-console">
+  <div style="color:var(--text-3);font-size:12px">Switch to this tab to load logs.</div>
+</div>
+
+<div style="font-size:11px;color:var(--text-3);margin-top:8px">
+  Auto-refreshes every 10s while this tab is active.
+  Showing last 200 lines of <code>debug.log</code>.
+</div>
